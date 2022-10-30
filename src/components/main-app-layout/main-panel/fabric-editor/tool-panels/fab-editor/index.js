@@ -21,7 +21,7 @@ const FabEditor = () => {
   const [confirmMessage, setConfirmMessage] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [selectedMark, setSelectedMark] = useState("");
-  const [testingText, setTestingText] = useState("Here you can show the data");
+  const [testingText] = useState("Here you can show the data");
 
   useEffect(() => {
     document.addEventListener(
@@ -39,6 +39,8 @@ const FabEditor = () => {
       true
     );
     inItCanvas();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -89,10 +91,10 @@ const FabEditor = () => {
     });
   }
   const gesture = (e, se) => {
-    if (e.e.touches && e.e.touches.length == 2) {
+    if (e.e.touches && e.e.touches.length === 2) {
       isDragMode = isDragMode && false;
       let point = new fabric.Point(e.self.x, e.self.y);
-      if (e.self.state == "start") {
+      if (e.self.state === "start") {
         zoomStartScale = canvas.getZoom();
       }
       let delta = zoomStartScale * e.self.scale;
@@ -108,16 +110,6 @@ const FabEditor = () => {
 
   const afterRender = () => {
     draw_grid(25);
-  };
-
-  const onTouchStart = (e) => {
-    console.log("onTouchStart", e);
-  };
-  const onTouchMove = (e) => {
-    console.log("onTouchMove", e);
-  };
-  const onTouchEnd = (e) => {
-    console.log("onTouchEnd", e);
   };
 
   function draw_grid(grid_size) {
